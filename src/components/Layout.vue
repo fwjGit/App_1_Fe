@@ -2,7 +2,12 @@
   <a-layout :style="{ minHeight: '100%' }">
     <a-layout-sider v-model:collapsed="collapsed" collapsible class="sider">
       <div class="logo" />
-      <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
+      <a-menu
+        v-model:selectedKeys="selectedKeys"
+        theme="dark"
+        mode="inline"
+        @select="selectHandler"
+      >
         <div v-for="{ name, id, children } in routeMessage">
           <a-menu-item :key="id" v-if="!children">
             <slot :name="id"><pie-chart-outlined /></slot>
@@ -52,13 +57,21 @@ const props = defineProps<{
   routeMessage: route
   generateRouteMap: (routes: route) => { [id: string]: string }
 }>()
+
+const emit = defineEmits<{
+  (e: 'routeHandler', id: string): void
+}>()
 const collapsed = ref<boolean>(false)
-const selectedKeys = ref<string[]>(['1'])
-const selectedNames = ref<string[]>(['1'])
+const selectedKeys = ref<string[]>([''])
+const selectedNames = ref<string[]>([''])
 
 const generateRouteMap = computed(() => {
   return props.generateRouteMap(props.routeMessage)
 })
+
+const selectHandler = ({ key }: { item: any; key: string; selectedKeys: string[] }) => {
+  emit('routeHandler', key)
+}
 
 watchEffect(() => {
   const keys = selectedKeys.value[0].split(',')

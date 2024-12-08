@@ -5,9 +5,10 @@ import UserLogo from '@/components/UserLogo.vue'
 import { onMounted, reactive } from 'vue'
 import { receiveToken, generateRouteMap } from '@/utils/tool'
 import { host, wsPort } from '@/utils/utils'
-import { PieChartOutlined, DesktopOutlined, UserOutlined } from '@ant-design/icons-vue'
-import type { VueElement } from 'vue'
+import { PieChartOutlined, DesktopOutlined } from '@ant-design/icons-vue'
 import type { VueNode } from 'ant-design-vue/es/_util/type'
+import { RouterView } from 'vue-router'
+import Router from '@/router/index'
 
 const detailStore = useDetailStore()
 const icon: {
@@ -16,6 +17,20 @@ const icon: {
   '1': PieChartOutlined,
   '4': DesktopOutlined,
 })
+
+// detail路由下的嵌套路由，需在项目中router文件中同步配置对应路由加载的组件
+const routePath: {
+  [key: string]: string
+} = reactive({
+  '1,2': '/test',
+  '1,3': '/test',
+  '4,5': '/test',
+  '4,6': '/test',
+})
+
+const routeHandler = (id: string = '1,2') => {
+  Router.push(routePath[id])
+}
 
 onMounted(() => {
   receiveToken({ callBack: detailStore.initLoadAction, host, port: wsPort })
@@ -28,9 +43,16 @@ onMounted(() => {
       <UserLogo :user-name="detailStore.userName" @click-handler="detailStore.logoutAction" />
     </div>
     <div class="content">
-      <Layout :routeMessage="detailStore.routeMessage" :generateRouteMap="generateRouteMap">
+      <Layout
+        :routeMessage="detailStore.routeMessage"
+        :generateRouteMap="generateRouteMap"
+        @route-handler="routeHandler"
+      >
         <template v-for="{ id } in detailStore.routeMessage" #[id]>
           <component :is="icon[id]"></component>
+        </template>
+        <template #content>
+          <RouterView />
         </template>
       </Layout>
     </div>

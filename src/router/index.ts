@@ -12,6 +12,13 @@ const router = createRouter({
       path: '/detail',
       name: 'detail',
       component: Detail,
+      children: [
+        {
+          path: '/test',
+          name: 'test',
+          component: () => import('../views/pages/detail/chat.vue'),
+        },
+      ],
     },
     {
       path: '/404',
