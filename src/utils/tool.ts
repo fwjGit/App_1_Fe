@@ -50,3 +50,21 @@ export const generateRouteMap = (
   })
   return map
 }
+
+// 创建webSocket连接
+export const createWebSocket = ({
+  host,
+  port,
+  callBack,
+}: {
+  host: string
+  port: string
+  callBack: (response: { msg?: string; userName?: string; length?: number }) => void
+}) => {
+  const socket = new WebSocket(`ws://${host}:${port}/chat?socketId=chat${Date.now()}`)
+  socket.onmessage = (event) => {
+    callBack(JSON.parse(event.data))
+  }
+
+  return socket
+}

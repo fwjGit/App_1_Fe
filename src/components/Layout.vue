@@ -25,13 +25,19 @@
         </div>
       </a-menu>
     </a-layout-sider>
-    <a-layout>
+    <a-layout class="content">
       <!-- <a-layout-header style="background: #fff; padding: 0" /> -->
       <a-layout-content style="margin: 0 16px">
         <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item v-for="name in selectedNames">{{ name }}</a-breadcrumb-item>
         </a-breadcrumb>
-        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px', height: '100%' }">
+        <div
+          :style="{
+            padding: '15px',
+            background: '#fff',
+            minHeight: '300px',
+          }"
+        >
           <slot name="content">default text</slot>
         </div>
       </a-layout-content>
@@ -62,7 +68,7 @@ const emit = defineEmits<{
   (e: 'routeHandler', id: string): void
 }>()
 const collapsed = ref<boolean>(false)
-const selectedKeys = ref<string[]>([''])
+const selectedKeys = ref<string[]>(['1'])
 const selectedNames = ref<string[]>([''])
 
 const generateRouteMap = computed(() => {
@@ -98,5 +104,17 @@ watchEffect(() => {
 
 .sider >>> .ant-layout-sider-trigger {
   position: absolute;
+}
+
+.content >>> .ant-breadcrumb {
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+.content >>> .ant-layout-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 50px 1fr;
 }
 </style>
