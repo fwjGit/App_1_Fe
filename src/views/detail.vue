@@ -22,10 +22,10 @@ const icon: {
 const routePath: {
   [key: string]: string
 } = reactive({
-  '1,2': '/test',
-  '1,3': '/test',
-  '4,5': '/test',
-  '4,6': '/test',
+  '1,2': '/chat',
+  '1,3': '/chat',
+  '4,5': '/chat',
+  '4,6': '/chat',
 })
 
 const routeHandler = (id: string = '1,2') => {
