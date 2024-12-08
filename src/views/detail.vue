@@ -2,12 +2,20 @@
 import Layout from '@/components/Layout.vue'
 import { useDetailStore } from '@/stores/detail'
 import UserLogo from '@/components/UserLogo.vue'
-import { onMounted } from 'vue'
+import { onMounted, reactive } from 'vue'
 import { receiveToken, generateRouteMap } from '@/utils/tool'
 import { host, wsPort } from '@/utils/utils'
 import { PieChartOutlined, DesktopOutlined, UserOutlined } from '@ant-design/icons-vue'
+import type { VueElement } from 'vue'
+import type { VueNode } from 'ant-design-vue/es/_util/type'
 
 const detailStore = useDetailStore()
+const icon: {
+  [key: string]: VueNode
+} = reactive({
+  '1': PieChartOutlined,
+  '4': DesktopOutlined,
+})
 
 onMounted(() => {
   receiveToken({ callBack: detailStore.initLoadAction, host, port: wsPort })
@@ -21,14 +29,8 @@ onMounted(() => {
     </div>
     <div class="content">
       <Layout :routeMessage="detailStore.routeMessage" :generateRouteMap="generateRouteMap">
-        <template #1>
-          <PieChartOutlined />
-        </template>
-        <template #4>
-          <DesktopOutlined />
-        </template>
-        <template #7>
-          <UserOutlined />
+        <template v-for="{ id } in detailStore.routeMessage" #[id]>
+          <component :is="icon[id]"></component>
         </template>
       </Layout>
     </div>
