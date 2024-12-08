@@ -3,6 +3,7 @@ import { logout, getRoutes, queryUserName } from '@/services/detail'
 import { useRouter } from 'vue-router'
 import { removeToken } from '@/utils/tool'
 import { reactive, ref } from 'vue'
+import scheduler from '@/utils/requestSchedule'
 
 export const useDetailStore = defineStore('detail', () => {
   const router = useRouter()
@@ -39,8 +40,16 @@ export const useDetailStore = defineStore('detail', () => {
   }
 
   const initLoadAction = () => {
-    queryUserNameAction()
-    queryRouteMessageAction()
+    scheduler.add(() => {
+      return new Promise((resolve, reject) => {
+        queryUserNameAction()
+      })
+    })
+    scheduler.add(() => {
+      return new Promise((resolve, reject) => {
+        queryRouteMessageAction()
+      })
+    })
   }
 
   return { logoutAction, userName, routeMessage, initLoadAction }
