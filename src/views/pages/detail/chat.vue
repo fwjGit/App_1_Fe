@@ -27,12 +27,12 @@ const chatStore = useChatStore()
 
 <style scoped>
 .container {
-  min-height: 400px;
   height: 100%;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+  overflow-y: hidden;
 }
 .message {
   flex: 1;

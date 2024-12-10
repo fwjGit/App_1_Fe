@@ -68,6 +68,8 @@ onMounted(() => {
 
 .header {
   background-color: black;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-wrap: nowrap;
   justify-content: flex-end;
@@ -76,9 +78,8 @@ onMounted(() => {
 
 .content {
   grid-row: 2/3;
-  min-height: 500px;
-  min-width: 1024px;
-  overflow: auto;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;

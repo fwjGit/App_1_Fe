@@ -51,6 +51,8 @@ defineProps<{
 .text {
   margin-top: 5px;
   color: gray;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .right {

@@ -1,5 +1,5 @@
 <template>
-  <a-layout :style="{ minHeight: '100%' }">
+  <a-layout :style="{ height: '100%' }">
     <a-layout-sider v-model:collapsed="collapsed" collapsible class="sider">
       <div class="logo" />
       <a-menu
