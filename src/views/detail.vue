@@ -38,7 +38,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="detailContainer">
     <div class="header">
       <UserLogo :user-name="detailStore.userName" @click-handler="detailStore.logoutAction" />
     </div>
@@ -60,7 +60,9 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.container {
+.detailContainer {
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 60px auto;

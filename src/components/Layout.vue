@@ -1,5 +1,5 @@
 <template>
-  <a-layout :style="{ height: '100%' }">
+  <a-layout :style="{ height: '100%', width: '100%' }">
     <a-layout-sider v-model:collapsed="collapsed" collapsible class="sider">
       <div class="logo" />
       <a-menu
@@ -28,20 +28,19 @@
     <a-layout class="content">
       <!-- <a-layout-header style="background: #fff; padding: 0" /> -->
       <a-layout-content style="margin: 0 16px">
-        <a-breadcrumb style="margin: 16px 0">
+        <a-breadcrumb>
           <a-breadcrumb-item v-for="name in selectedNames">{{ name }}</a-breadcrumb-item>
         </a-breadcrumb>
         <div
           :style="{
             padding: '15px',
             background: '#fff',
-            minHeight: '300px',
           }"
         >
           <slot name="content">default text</slot>
         </div>
       </a-layout-content>
-      <a-layout-footer :style="{ textAlign: 'center', minHeight: '50px', maxHeight: '60px' }">
+      <a-layout-footer :style="{ textAlign: 'center', height: '62px' }">
         <slot name="footer">Ant Design ©2018 Created by Ant UED</slot>
       </a-layout-footer>
     </a-layout>
@@ -107,7 +106,8 @@ watchEffect(() => {
 }
 
 .content >>> .ant-breadcrumb {
-  margin: 0 !important;
+  height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
 }

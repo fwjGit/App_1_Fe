@@ -49,22 +49,23 @@ const postText = () => {
 }
 
 .chatBox {
-  min-height: 400px;
-  max-height: 500px;
-  flex: 2 1 400px;
+  flex: 1 1 200px;
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 40px;
-  grid-gap: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: nowrap;
+  justify-content: center;
   padding: 10px 0px;
 }
 .box {
+  min-height: 200px;
+  max-height: 350px;
+  height: 100%;
   overflow-y: auto;
   border: 1px solid grey;
 }
 .inputBox {
-  grid-row: 2/3;
   width: 100%;
   height: 40px;
   display: grid;

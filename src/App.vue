@@ -35,8 +35,10 @@ const locale = ref(zhCN)
 
 <style scoped>
 .container {
+  width: 100%;
+  height: 100%;
   display: grid;
-  grid-template-columns: repeat('auto-fill', 100%);
-  grid-template-rows: repeat('auto-fill', 100%);
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
 }
 </style>
