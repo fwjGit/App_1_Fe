@@ -18,6 +18,11 @@ const router = createRouter({
           name: 'chat',
           component: () => import('../views/pages/detail/chat.vue'),
         },
+        {
+          path: '/AIChat',
+          name: 'AIChat',
+          component: () => import('../views/pages/detail/AIChat.vue'),
+        },
       ],
     },
     {

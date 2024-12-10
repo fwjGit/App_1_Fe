@@ -1,5 +1,5 @@
 <template>
-  <a-list item-layout="horizontal" :data-source="data">
+  <a-list item-layout="horizontal" :data-source="data" :locale="{ emptyText: ' ' }">
     <template #renderItem="{ item }">
       <a-list-item>
         <div class="container">
