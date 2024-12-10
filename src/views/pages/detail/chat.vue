@@ -2,7 +2,7 @@
   <div class="container">
     <Chat
       :is-show-description="true"
-      :is-show-chat-box="chatStore.socket"
+      :is-show-chat-box="chatStore.socket !== null"
       :chat-content="chatStore.chatContent"
       :post-chat-text="chatStore.postChatText"
     >

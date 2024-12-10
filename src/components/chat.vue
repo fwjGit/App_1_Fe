@@ -30,7 +30,6 @@ const props = defineProps<{
   isShowDescription: boolean
   isShowChatBox: boolean
   chatContent: { type: string; text: string; userName: string }[]
-  chatText: string
   postChatText: (value: string) => void
 }>()
 

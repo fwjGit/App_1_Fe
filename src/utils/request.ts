@@ -1,5 +1,6 @@
 import axios from 'axios'
 import router from '@/router/index'
+import { apiKey } from '@/utils/utils'
 
 let request = axios.create({
   timeout: 3000,
@@ -9,8 +10,14 @@ let request = axios.create({
 // 请求拦截器封装
 request.interceptors.request.use(
   (config) => {
-    let { headers } = config
-    headers['Authorization'] = localStorage.getItem('token')
+    let { headers, url } = config
+
+    // AI请求需要设置特定的请求头
+    headers['Authorization'] =
+      url?.search('AI') === -1 ? localStorage.getItem('token') : `Bearer ${apiKey}`
+    headers['Content-Type'] =
+      url?.search('AI') === -1 ? headers['Content-Type'] : 'application/json'
+
     return config
   },
   (error) => {

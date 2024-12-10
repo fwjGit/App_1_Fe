@@ -23,9 +23,9 @@ const routePath: {
   [key: string]: string
 } = reactive({
   '1,2': '/chat',
-  '1,3': '/AIChat',
+  '1,3': '/aiChat',
   '4,5': '/chat',
-  '4,6': '/AIChat',
+  '4,6': '/aiChat',
 })
 
 const routeHandler = (id: string = '1,2') => {

@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
-import { url } from './src/utils/utils'
+import { url, aiUrl } from './src/utils/utils'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -25,12 +25,12 @@ export default defineConfig({
         ws: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
-      // '/ws': {
-      //   target: url,
-      //   changeOrigin: true,
-      //   ws: true,
-      //   rewrite: (path) => path.replace(/^\/ws/, ''),
-      // },
+      '/AI': {
+        target: aiUrl,
+        changeOrigin: true,
+        ws: true,
+        rewrite: (path) => path.replace(/^\/AI/, ''),
+      },
     },
   },
   build: {

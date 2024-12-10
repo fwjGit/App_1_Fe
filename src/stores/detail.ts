@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { logout, getRoutes, queryUserName } from '@/services/detail'
 import { useRouter } from 'vue-router'
 import { removeToken } from '@/utils/tool'
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import scheduler from '@/utils/requestSchedule'
 
 export const useDetailStore = defineStore('detail', () => {
