@@ -3,7 +3,7 @@ import router from '@/router/index'
 import { apiKey } from '@/utils/utils'
 
 let request = axios.create({
-  timeout: 3000,
+  timeout: 6000,
   headers: {},
 })
 
