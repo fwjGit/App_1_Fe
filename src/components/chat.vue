@@ -3,7 +3,7 @@
     <slot name="description"></slot>
   </div>
   <div class="chatBox" v-if="isShowChatBox">
-    <div class="box">
+    <div class="box" ref="scrollElement">
       <List :data="chatContent">
         <template #content="{ listItem }">
           <ChatText :data="listItem" />
@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import List from '@/components/list.vue'
 import ChatText from '@/components/ChatText.vue'
-import { ref } from 'vue'
+import { ref, watch, reactive } from 'vue'
 
 const props = defineProps<{
   isShowDescription: boolean
@@ -32,11 +32,23 @@ const props = defineProps<{
 }>()
 
 const chatText = ref<string>('')
+const scrollElement = ref<HTMLElement | null>(null)
+const chat = reactive(props.chatContent)
 
 const postText = () => {
   props.postChatText(chatText.value)
   chatText.value = ''
 }
+
+// 聊天框内容触底时自动下拉
+const onScroll = (e: HTMLElement | null) => {
+  if (!e) return
+  e.scrollTop = e.scrollHeight
+}
+
+watch([() => chat.length, () => chat[chat.length - 1]?.text], (newVal) => {
+  onScroll(scrollElement.value)
+})
 </script>
 
 <style scoped>
