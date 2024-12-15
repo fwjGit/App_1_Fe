@@ -10,7 +10,7 @@ export const useDetailStore = defineStore('detail', () => {
   const userName = ref('')
   let routeMessage = ref([])
 
-  const logoutAction = async () => {
+  const logout = async () => {
     let result: { code?: number; data?: any } = await logout()
     if (result?.code && result?.code === 200) {
       removeToken()
@@ -48,6 +48,14 @@ export const useDetailStore = defineStore('detail', () => {
     scheduler.add(() => {
       return new Promise((resolve, reject) => {
         queryRouteMessageAction()
+      })
+    })
+  }
+
+  const logoutAction = () => {
+    scheduler.add(() => {
+      return new Promise((resolve, reject) => {
+        logout()
       })
     })
   }
