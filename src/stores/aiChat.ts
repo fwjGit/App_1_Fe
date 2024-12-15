@@ -12,18 +12,34 @@ export const useAIChatStore = defineStore('aiChat', () => {
   const postText = async (value: string) => {
     chatContent.push({ type: 'req', text: value, userName: detailStore.userName })
 
-    let { choices }: { choices: any[]; [key: string]: any } = (await chatWithAI(value)) as any
+    const onmessage = (event: any) => {
+      let data
+      try {
+        if (event.data === '[DONE]') return
 
-    if (choices.length > 0) {
-      const { finish_reason, message } = choices[0]
-      if (finish_reason === 'stop') {
-        chatContent.push({ type: 'res', text: message.content, userName: message.role })
-      } else {
-        console.log('AI程序出现意外了')
+        data = JSON.parse(event.data)
+        const { choices } = data
+
+        const { finish_reason, delta } = choices[0]
+        if (finish_reason !== 'stop') {
+          if (delta.role) {
+            chatContent.push({ type: 'res', text: '', userName: delta.role })
+          } else {
+            const index = chatContent.length - 1
+            const content = chatContent[index].text
+            chatContent[index].text = content + delta.content
+          }
+        } else {
+          console.log('AI传递完成了')
+        }
+      } catch (error) {
+        console.error(error)
       }
-    } else {
-      alert('AI请求出错了')
     }
+    const onerror = () => {
+      console.log('AI出错了')
+    }
+    await chatWithAI({ value, onmessage, onerror })
   }
 
   const postChatText = (value: string) => {

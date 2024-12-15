@@ -5,6 +5,7 @@ import { apiKey } from '@/utils/utils'
 let request = axios.create({
   timeout: 6000,
   headers: {},
+  // adapter: ['fetch', 'xhr', 'http'],
 })
 
 // 请求拦截器封装
